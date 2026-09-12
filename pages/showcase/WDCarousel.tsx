@@ -5,7 +5,6 @@ import {
   HStack,
   Image,
   Link,
-  PositionProps,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -13,7 +12,7 @@ import { useState } from "react";
 export const WDCarousel = () => {
   const arrowStyles = {
     cursor: "pointer",
-    pos: "absolute" as PositionProps["pos"],
+    pos: "absolute",
     top: "50%",
     w: "auto",
     mt: "-22px",
@@ -135,7 +134,7 @@ export const WDCarousel = () => {
               >
                 <Text fontSize="2xl">{slide.label}</Text>
                 <Text fontSize="lg">{slide.description}</Text>
-                <Link isExternal fontSize="md" href={slide.url}>
+                <Link target="_blank" fontSize="md" href={slide.url}>
                   <Button colorScheme="yellow">Visit</Button>
                 </Link>
               </Stack>

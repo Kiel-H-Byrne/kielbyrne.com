@@ -13,13 +13,16 @@
     "format:check": "prettier --check --ignore-path=.gitignore ."
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.37.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "framer-motion": "^11.15.0",
     "next": "^13.4.4",
     "next-seo": "^6.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2",
-    "three": "^0.171.0"
+    "three": "^0.186.0"
   },
   "devDependencies": {
     "@tanstack/react-query": "^4.0.0",
@@ -27,6 +30,7 @@
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.9",
     "@types/react-dom": "^18.2.4",
+    "@types/three": "^0.186.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.42.0",
     "eslint-config-next": "^13.4.5",

@@ -1,3 +1,5 @@
+import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const WritingSampleSection = () => {
@@ -21,13 +23,13 @@ export const WritingSampleSection = () => {
 
   return (
     <Box p={4}>
-      <SimpleGrid columns={2} spacing={4}>
+      <SimpleGrid columns={2} spaceX={4}>
         {writingSamples.map((sample, index) => (
           <Box key={index} borderWidth="1px" borderRadius="md">
             <Image
               src={sample.imageUrl}
               alt={sample.title}
-              height="200px"
+              height="200"
               objectFit="cover"
             />
             <Box p={4}>

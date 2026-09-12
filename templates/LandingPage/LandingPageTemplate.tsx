@@ -1,3 +1,4 @@
+import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import Script from "next/script";
 
@@ -79,12 +80,9 @@ const LandingPageTemplate = () => {
           seek light by exploring spiritual alchemy, diving into readings that
           enlighten me on profound topics, and conducting Masonic business. If
           you want to connect and discuss exciting projects, collaborations, or
-          simply share interesting ideas, feel free to reach out to me via email
-          at{" "}
-          <Link href="mailto:kiel.byrne@gmail.com">kiel.byrne@gmail.com</Link>{" "}
-          or give me a call at{" "}
-          <Link href="tel:+12024686155">(202) 468-6155</Link>. Also check out my
-          IT Consulting company,{" "}
+          simply share interesting ideas, feel free to connect with me on{" "}
+          <Link href="https://www.linkedin.com/in/kielbyrne">LinkedIn</Link>.
+          Also check out my IT Consulting company,{" "}
           <Link href="https://www.tenksolutions.com">TenK Solutions</Link>.
           Let's make a positive change in the world together! 😊
         </Text>

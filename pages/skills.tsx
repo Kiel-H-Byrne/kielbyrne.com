@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Box, Container, Heading } from "@chakra-ui/react";
 import Script from "next/script";
 import { DevImg } from "./DevImg";
 
