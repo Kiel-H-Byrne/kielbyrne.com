@@ -38,9 +38,9 @@ const dimensions: Dimension[] = [
     accentColor: "from-cyan-500 to-blue-600",
     tagColor: "text-cyan-400 bg-cyan-950/60 border-cyan-800/60",
     description:
-      "I build responsive, component-driven user interfaces and solve frontend challenges at scale—currently as a Frontend Software Developer at Lyntris (LYNX). Over the years, I've engineered internationalized UI systems across 7+ languages and 155 currencies, automated translation workflows, and built full-stack tooling.",
+      "I build responsive, component-driven user interfaces and solve frontend challenges at scale. Over the years, I've engineered internationalized UI systems across 7+ languages and 155 currencies, automated translation workflows, and built full-stack tooling.",
     highlights: [
-      "Currently building modern frontend interfaces at Lyntris (LYNX).",
+      "Engineering modern, accessible frontend web applications using React, Next.js, and TypeScript.",
       "Cut translation turnaround times by 78% (from 9 days to 2) with automated pipelines at CoStar.",
       "Engineered merchandising and advertising features using React Native, TypeScript, and GraphQL at Gopuff.",
     ],
@@ -65,8 +65,9 @@ const dimensions: Dimension[] = [
     accentColor: "from-emerald-500 to-teal-600",
     tagColor: "text-emerald-400 bg-emerald-950/60 border-emerald-800/60",
     description:
-      "Good systems are like good plumbing—when engineered cleanly, everything flows effortlessly without downtime. Through TenK Solutions (tenksolutions.com), I partner with companies across the DMV and nationally to eliminate operational bottlenecks with AI automation, client intake workflows, executive dashboards, and resilient IT infrastructure. I also serve as an active IT Board Member advising on cybersecurity, risk management, and digital transformation.",
+      "Good systems are like good plumbing—when engineered cleanly, everything flows effortlessly without downtime. Through TenK Solutions (tenksolutions.com), I partner with companies across the DMV and nationally to eliminate operational bottlenecks with AI automation, client intake workflows, executive dashboards, and resilient IT infrastructure. I also serve as IT Director for PHFAMOESCEF (phfamoescef.com) and active IT Board Member advising on cybersecurity, risk management, and digital transformation.",
     highlights: [
+      "PHFAMOESCEF Technology Stewardship: Directing IT operations, secure administrative records, and digital infrastructure for Prince Hall educational and charitable endowment programs.",
       "AI & Business Operations Automation: Designing automated client intake, staff knowledge systems, and executive dashboards with TenK Solutions.",
       "Enterprise Asset Telemetry: Built custom collectors & web dashboards tracking 2,500+ endpoints across 7 countries at Perkins&Will.",
       "Fractional Systems Engineering: Hands-on consulting for companies needing senior technical architecture without full-time C-suite overhead.",
@@ -74,6 +75,7 @@ const dimensions: Dimension[] = [
     ],
     skills: [
       "TenK Solutions (tenksolutions.com)",
+      "PHFAMOESCEF (IT Director)",
       "AI Workflow Automation",
       "Business Operations",
       "Executive Dashboards",
@@ -140,19 +142,22 @@ const dimensions: Dimension[] = [
     id: "community",
     tabLabel: "Community & Ethos",
     title: "Community, Culture & Life",
-    subtitle: "The MOBB, Freemasonry, Fatherhood & Sport",
+    subtitle: "PHFAMOESCEF, The MOBB, Freemasonry & Mentorship",
     icon: <FaUsers className="text-rose-400 text-2xl" />,
     accentColor: "from-rose-500 to-pink-600",
     tagColor: "text-rose-400 bg-rose-950/60 border-rose-800/60",
     description:
-      "Code is a tool, not an identity. My purpose comes from family—raising two young sons, learning from Freemasonry's moral craftsmanship, playing a round of golf, hitting the roller rink, and building community projects like The MOBB to help people discover and support Black-owned businesses.",
+      "Code is a tool, not an identity. My purpose comes from family—raising two young sons, serving as IT Director for PHFAMOESCEF (phfamoescef.com), learning from Freemasonry's moral craftsmanship, playing a round of golf, hitting the roller rink, and building community projects like The MOBB to help people discover and support Black-owned businesses.",
     highlights: [
+      "IT Director for PHFAMOESCEF (phfamoescef.com): Leading digital transformation, online event platforms, and technology stewardship for Prince Hall Masonic charity and educational foundations.",
       "Built The MOBB (Map of Black Businesses) to drive local patronage to minority enterprises.",
       "Helped my 9-year-old son brainstorm, write, and self-publish his first book with ChatGPT.",
       "Active Freemason, dedicated father and husband, amateur golfer, and roller skater.",
     ],
     skills: [
+      "PHFAMOESCEF (IT Director)",
       "The MOBB",
+      "SEED SPOT Mentorship",
       "Youth AI Mentorship",
       "Freemasonry",
       "Supreme Mathematics",

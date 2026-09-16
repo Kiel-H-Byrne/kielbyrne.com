@@ -1,10 +1,6 @@
-import Image from "next/image";
 import React from "react";
-import {
-  FaBriefcase,
-  FaGraduationCap,
-  FaExternalLinkAlt,
-} from "react-icons/fa";
+import { FaBriefcase, FaExternalLinkAlt } from "react-icons/fa";
+import PersonaCarousel from "./PersonaCarousel";
 
 interface TimelineItem {
   period: string;
@@ -47,9 +43,24 @@ const careerTimeline: TimelineItem[] = [
     ],
   },
   {
+    period: "Ongoing",
+    role: "IT Director & Technology Stewardship",
+    organization: "PHFAMOESCEF",
+    orgUrl: "https://www.phfamoescef.com",
+    badge: "Community & Leadership",
+    badgeColor: "bg-amber-950/80 text-amber-400 border-amber-800/80",
+    summary:
+      "Directing technological stewardship, web infrastructure, and digital communications for Prince Hall Masonic education and charitable endowment initiatives.",
+    details: [
+      "Leading digital transformation, secure administrative workflows, and online event infrastructure.",
+      "Stewarding long-term digital heritage and educational philanthropy for community development.",
+    ],
+  },
+  {
     period: "2022 – 2023",
     role: "Software Engineer – Digital Merchandising & I18N",
     organization: "GoBrands (Gopuff, BevMo)",
+    orgUrl: "https://gopuff.com",
     badge: "Full-Stack & Mobile",
     badgeColor: "bg-blue-950/80 text-blue-400 border-blue-800/80",
     summary:
@@ -63,6 +74,7 @@ const careerTimeline: TimelineItem[] = [
     period: "2019 – 2022",
     role: "Software Engineer – Internationalization",
     organization: "CoStar Group",
+    orgUrl: "https://www.costargroup.com",
     badge: "Global Scale",
     badgeColor: "bg-purple-950/80 text-purple-400 border-purple-800/80",
     summary:
@@ -77,6 +89,7 @@ const careerTimeline: TimelineItem[] = [
     period: "2015 – 2019",
     role: "IT Services Manager & Infrastructure Site Lead",
     organization: "Perkins&Will",
+    orgUrl: "https://perkinswill.com",
     badge: "Systems & DevOps",
     badgeColor: "bg-amber-950/80 text-amber-400 border-amber-800/80",
     summary:
@@ -90,6 +103,7 @@ const careerTimeline: TimelineItem[] = [
     period: "2012 – 2015",
     role: "IT Support Specialist",
     organization: "HOK (NYC, LA, DC)",
+    orgUrl: "https://www.hok.com",
     badge: "Infrastructure",
     badgeColor: "bg-slate-800 text-slate-300 border-slate-700",
     summary:
@@ -102,6 +116,7 @@ const careerTimeline: TimelineItem[] = [
     period: "Foundations",
     role: "Mechanical Engineering & Systems Design",
     organization: "UMBC (B.S.) • NYU • Excelsior College",
+    orgUrl: "https://umbc.edu",
     badge: "Education & Roots",
     badgeColor: "bg-slate-800 text-slate-300 border-slate-700",
     summary:
@@ -116,6 +131,7 @@ const careerTimeline: TimelineItem[] = [
     period: "1995",
     role: "Video Game Tester (First Tech Job Ever)",
     organization: "War 2410 (Super Nintendo / SNES)",
+    orgUrl: "https://en.wikipedia.org/wiki/War_2410",
     badge: "Retro Origin",
     badgeColor: "bg-purple-950/80 text-purple-400 border-purple-800/80",
     summary:
@@ -147,35 +163,13 @@ const AboutSection: React.FC = () => {
 
         {/* Narrative Intro Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-20 bg-slate-950/80 rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl">
-          {/* Portrait & Badges */}
-          <div className="lg:col-span-4 flex flex-col items-center">
-            <div className="relative group mb-6">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-amber-500 rounded-3xl blur-md opacity-40 group-hover:opacity-75 transition duration-500" />
-              <div className="relative rounded-2xl overflow-hidden border border-slate-700 bg-slate-950 p-2 shadow-xl">
-                <Image
-                  src="/img/coolkiel.jpg"
-                  alt="Kiel Hamilton Byrne"
-                  width={280}
-                  height={280}
-                  className="rounded-xl object-cover w-64 h-64 sm:w-72 sm:h-72 mx-auto transition duration-500 group-hover:scale-105"
-                  priority
-                />
-              </div>
-            </div>
-
-            <div className="text-center space-y-1">
-              <div className="text-lg font-bold text-white">
-                Kiel Hamilton Byrne
-              </div>
-              <div className="text-xs text-emerald-400 font-medium">
-                Frontend Developer @ Lyntris (LYNX)
-              </div>
-              <div className="text-xs text-slate-400">Washington, DC Area</div>
-            </div>
+          {/* Persona & Hats Carousel */}
+          <div className="lg:col-span-5 flex flex-col items-center">
+            <PersonaCarousel />
           </div>
 
           {/* Human Bio Copy */}
-          <div className="lg:col-span-8 space-y-5 text-slate-300 font-light leading-relaxed text-base sm:text-lg">
+          <div className="lg:col-span-7 space-y-5 text-slate-300 font-light leading-relaxed text-base sm:text-lg">
             <p>
               I’ve always been someone who wants to understand how the whole
               machine works—whether that machine is a piece of software, a
@@ -184,13 +178,23 @@ const AboutSection: React.FC = () => {
 
             <p>
               My background started in physical engineering with a{" "}
-              <strong className="text-white font-medium">
+              <a
+                href="https://umbc.edu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-cyan-300 font-medium underline underline-offset-4"
+              >
                 B.S. in Mechanical Engineering from UMBC
-              </strong>{" "}
+              </a>{" "}
               and certification in{" "}
-              <strong className="text-white font-medium">
+              <a
+                href="https://www.sps.nyu.edu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-cyan-300 font-medium underline underline-offset-4"
+              >
                 Plumbing Systems Design from NYU
-              </strong>
+              </a>
               . That training gave me a lasting appreciation for codes, flow
               rates, and structural integrity that carried over naturally when I
               moved into technology.
@@ -199,26 +203,61 @@ const AboutSection: React.FC = () => {
             <p>
               Over the years, I managed multi-office infrastructure for
               architecture firms like{" "}
-              <strong className="text-white font-medium">
+              <a
+                href="https://perkinswill.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-cyan-300 font-medium underline underline-offset-4"
+              >
                 Perkins&amp;Will
-              </strong>{" "}
+              </a>{" "}
               (where I built an automated tracker for 2,500+ global assets),
               engineered internationalized frontend platforms for{" "}
-              <strong className="text-white font-medium">CoStar Group</strong>{" "}
+              <a
+                href="https://www.costargroup.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-cyan-300 font-medium underline underline-offset-4"
+              >
+                CoStar Group
+              </a>{" "}
               and{" "}
-              <strong className="text-white font-medium">Gopuff / BevMo</strong>
-              , and now work as a{" "}
+              <a
+                href="https://gopuff.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-cyan-300 font-medium underline underline-offset-4"
+              >
+                Gopuff / BevMo
+              </a>
+              , and now engineer modern web applications as a dedicated{" "}
               <strong className="text-white font-medium">
-                Frontend Software Developer at Lyntris (LYNX)
+                Frontend Software Developer
               </strong>
               .
             </p>
 
             <p>
-              Along the way, I’ve stayed deeply plugged into community:
-              mentoring social-impact founders through{" "}
-              <strong className="text-white font-medium">SEED SPOT</strong>,
-              creating cultural platforms with{" "}
+              Along the way, I’ve stayed deeply plugged into community: serving
+              as IT Director for the{" "}
+              <a
+                href="https://www.phfamoescef.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-cyan-300 font-medium underline underline-offset-4"
+              >
+                PHFAMOESCEF
+              </a>{" "}
+              endowment foundation, mentoring social-impact founders through{" "}
+              <a
+                href="https://seedspot.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-cyan-300 font-medium underline underline-offset-4"
+              >
+                SEED SPOT
+              </a>
+              , creating cultural platforms with{" "}
               <strong className="text-white font-medium">PAKKE</strong>, and
               building{" "}
               <strong className="text-white font-medium">The MOBB</strong> to
@@ -238,7 +277,7 @@ const AboutSection: React.FC = () => {
               </a>{" "}
               for hands-on IT consulting, voice commercials and narrations, play
               a little golf, roller skate whenever I can, and spend every
-              possible moment with my wife and two sons.
+              possible moment with my family.
             </p>
           </div>
         </div>

@@ -17,11 +17,12 @@ const Home: NextPage = () => {
     name: "Kiel Hamilton Byrne",
     alternateName: "Kiel Byrne",
     url: "https://www.kielbyrne.com",
-    image: "https://www.kielbyrne.com/img/coolkiel.jpg",
+    image: "https://www.kielbyrne.com/img/personas/code-ronin.png",
     jobTitle: "Frontend Software Developer",
     worksFor: {
       "@type": "Organization",
-      name: "Lyntris (LYNX)",
+      name: "TenK Solutions",
+      url: "https://www.tenksolutions.com",
     },
     alumniOf: [
       {
@@ -41,6 +42,7 @@ const Home: NextPage = () => {
       "https://www.linkedin.com/in/kielbyrne",
       "https://github.com/kiel-h-byrne",
       "https://www.tenksolutions.com",
+      "https://www.phfamoescef.com",
     ],
     knowsAbout: [
       "Frontend Software Development",
@@ -61,11 +63,11 @@ const Home: NextPage = () => {
         </title>
         <meta
           name="description"
-          content="Personal website of Kiel Hamilton Byrne. Frontend Software Developer at Lyntris (LYNX), IT consultant at TenK Solutions, voice actor, and mechanical engineering graduate."
+          content="Personal website of Kiel Hamilton Byrne. Frontend Software Developer, principal systems consultant at TenK Solutions, IT Director at PHFAMOESCEF, voice actor, and mechanical engineering graduate."
         />
         <meta
           name="keywords"
-          content="Kiel Byrne, Frontend Developer, Lyntris, LYNX, Systems Architect, Voiceover, TenK Solutions, The MOBB"
+          content="Kiel Byrne, Frontend Developer, Systems Architect, Voiceover, TenK Solutions, PHFAMOESCEF, The MOBB, Modern Web"
         />
         <meta name="author" content="Kiel Hamilton Byrne" />
 
@@ -78,11 +80,11 @@ const Home: NextPage = () => {
         />
         <meta
           property="og:description"
-          content="Frontend Software Developer at Lyntris (LYNX), systems consultant, and creative problem solver."
+          content="Frontend Software Developer, systems consultant at TenK Solutions, and creative problem solver."
         />
         <meta
           property="og:image"
-          content="https://www.kielbyrne.com/img/coolkiel.jpg"
+          content="https://www.kielbyrne.com/img/personas/code-ronin.png"
         />
 
         {/* Twitter */}
@@ -94,11 +96,11 @@ const Home: NextPage = () => {
         />
         <meta
           property="twitter:description"
-          content="Frontend Software Developer at Lyntris (LYNX), systems consultant, and creative problem solver."
+          content="Frontend Software Developer, systems consultant at TenK Solutions, and creative problem solver."
         />
         <meta
           property="twitter:image"
-          content="https://www.kielbyrne.com/img/coolkiel.jpg"
+          content="https://www.kielbyrne.com/img/personas/code-ronin.png"
         />
 
         {/* JSON-LD Schema */}
@@ -110,7 +112,7 @@ const Home: NextPage = () => {
 
       <Navbar />
 
-      <main className="bg-slate-950 text-white min-h-screen selection:bg-cyan-500 selection:text-slate-950">
+      <main className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white min-h-screen selection:bg-cyan-500 selection:text-slate-950 transition-colors duration-500">
         <HeroSection />
         <GoogleRabbitHole />
         <AboutSection />

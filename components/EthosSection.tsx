@@ -11,10 +11,25 @@ const ethosItems = [
     badge: "Family First",
   },
   {
-    title: "Freemasonry & Brotherhood",
+    title: "Freemasonry & Stewardship",
     icon: <FaCompass className="text-amber-400 text-2xl" />,
-    description:
-      "Rooted in ancient principles of mutual support, moral self-improvement, and service. Freemasonry reminds me that all great edifices—whether social, moral, or digital—are assembled stone by stone with integrity and true measure.",
+    description: (
+      <>
+        Rooted in ancient principles of mutual support, moral self-improvement,
+        and service. Serving as IT Director for the{" "}
+        <a
+          href="https://www.phfamoescef.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-amber-400 hover:underline font-medium"
+        >
+          PHFAMOESCEF
+        </a>{" "}
+        charitable endowment foundation unites technological stewardship with
+        Masonic leadership, reminding me that all enduring edifices are built
+        with true measure.
+      </>
+    ),
     badge: "Moral Architecture",
   },
   {

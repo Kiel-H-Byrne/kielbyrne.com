@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useSectionTracker } from "@/hooks/useSectionTracker";
+import CelestialToggle from "./CelestialToggle";
 
 const navItems = [
   { id: "hero", label: "Home" },
@@ -61,8 +62,9 @@ const Navbar: React.FC = () => {
           })}
         </ul>
 
-        {/* Action Button (Desktop) */}
-        <div className="hidden lg:flex items-center">
+        {/* Action Button & Celestial Day/Night Toggle (Desktop) */}
+        <div className="hidden lg:flex items-center gap-3">
+          <CelestialToggle />
           <button
             onClick={() => handleNavClick("connect")}
             className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg shadow-md shadow-cyan-900/20 transition transform hover:-translate-y-0.5"
@@ -71,8 +73,9 @@ const Navbar: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Hamburger Icon */}
-        <div className="lg:hidden">
+        {/* Mobile Actions: Celestial Toggle & Hamburger */}
+        <div className="lg:hidden flex items-center gap-2">
+          <CelestialToggle compact />
           <button
             onClick={() => setNavOpen(!navOpen)}
             aria-label="Toggle Menu"

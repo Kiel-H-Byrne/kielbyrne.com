@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import {
-  FaSearch,
-  FaGamepad,
-  FaMicrophone,
-  FaRocket,
-  FaLaptopCode,
-  FaSmileBeam,
-  FaPuzzlePiece,
   FaArrowRight,
+  FaGamepad,
+  FaLaptopCode,
+  FaMicrophone,
+  FaPuzzlePiece,
+  FaRocket,
+  FaSearch,
   FaServer,
+  FaSmileBeam,
 } from "react-icons/fa";
 
 interface StoryPrompt {
@@ -16,7 +16,7 @@ interface StoryPrompt {
   icon: React.ReactNode;
   shortTag: string;
   question: string;
-  answer: string;
+  answer: React.ReactNode;
   actionText: string;
   targetId: string;
 }
@@ -27,8 +27,23 @@ const prompts: StoryPrompt[] = [
     icon: <FaGamepad className="text-purple-400" />,
     shortTag: "Retro Gaming",
     question: "Wait, did you really test Super Nintendo games as a kid?",
-    answer:
-      "Yep, that's true! Back in 1995, my first gig in tech was QA testing for 'War 2410' on the Super Nintendo. Spending hours trying to find every glitch taught me early on that understanding how things break is the best way to learn how to build things that last.",
+    answer: (
+      <>
+        Yep, that&apos;s true! Back in 1995, my first gig in tech was QA testing
+        for{" "}
+        <a
+          href="https://en.wikipedia.org/wiki/War_2410"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          War 2410
+        </a>{" "}
+        on the Super Nintendo. Spending hours trying to find every glitch taught
+        me early on that understanding how things break is the best way to learn
+        how to build things that last.
+      </>
+    ),
     actionText: "See My Journey →",
     targetId: "about",
   },
@@ -37,18 +52,48 @@ const prompts: StoryPrompt[] = [
     icon: <FaMicrophone className="text-amber-400" />,
     shortTag: "Voiceover & Audio",
     question: "Did I hear your voice on an ad or presentation somewhere?",
-    answer:
-      "That could very well be me! I do character voices for commercials, narrate children's books, and have done informational voice work like the municipal transit presentations for the City of New Orleans (NORTA). I also love making beats and producing tracks in Logic Pro.",
+    answer: (
+      <>
+        That could very well be me! I do character voices for commercials,
+        narrate children&apos;s books, and have done informational voice work
+        like the municipal transit presentations for the City of New Orleans
+        (NORTA). I also love making beats and producing tracks in Logic Pro.
+      </>
+    ),
     actionText: "Listen in the Audio Lab →",
     targetId: "audio-lab",
   },
   {
     id: "community",
     icon: <FaRocket className="text-emerald-400" />,
-    shortTag: "SEED SPOT / PAKKE",
-    question: "Did we meet through SEED SPOT, PAKKE, or around DC?",
-    answer:
-      "Very likely! I'm big on community initiatives—whether mentoring mission-driven founders with SEED SPOT, hosting cultural events with PAKKE, or building The MOBB to help people find and support local Black-owned businesses.",
+    shortTag: "SEED SPOT / Community",
+    question: "Did we meet through SEED SPOT, PHFAMOESCEF, or around DC?",
+    answer: (
+      <>
+        Very likely! I&apos;m big on community stewardship—whether mentoring
+        mission-driven founders with{" "}
+        <a
+          href="https://seedspot.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          SEED SPOT
+        </a>
+        , serving as IT Director for the{" "}
+        <a
+          href="https://www.phfamoescef.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          PHFAMOESCEF
+        </a>{" "}
+        endowment and charity foundation, hosting cultural gatherings with
+        PAKKE, or building The MOBB to help people find and support local
+        Black-owned businesses.
+      </>
+    ),
     actionText: "See Community Projects →",
     targetId: "creations",
   },
@@ -56,9 +101,42 @@ const prompts: StoryPrompt[] = [
     id: "code",
     icon: <FaLaptopCode className="text-cyan-400" />,
     shortTag: "Frontend & Code",
-    question: "I came across your GitHub, PWITW, or Lyntris (LYNX) work.",
-    answer:
-      "Welcome! Right now I'm building frontend interfaces at Lyntris (LYNX). Before this, I tracked 2,500+ workstations across 7 countries at Perkins&Will, and worked on internationalized frontend platforms across 7+ languages and 155 currencies at CoStar and Gopuff.",
+    question: "I came across your GitHub, PWITW, or frontend web work.",
+    answer: (
+      <>
+        Welcome! Right now I&apos;m engineering modern, component-driven
+        frontend web applications. Before this, I tracked 2,500+ workstations
+        across 7 countries at{" "}
+        <a
+          href="https://perkinswill.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          Perkins&amp;Will
+        </a>
+        , and worked on internationalized frontend platforms across 7+ languages
+        and 155 currencies at{" "}
+        <a
+          href="https://www.costargroup.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          CoStar Group
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://gopuff.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          Gopuff
+        </a>
+        .
+      </>
+    ),
     actionText: "Browse My Work →",
     targetId: "creations",
   },
@@ -68,8 +146,41 @@ const prompts: StoryPrompt[] = [
     shortTag: "IT Systems & Consulting",
     question:
       "We need an IT systems architect, infrastructure lead, or automation partner.",
-    answer:
-      "That's exactly what I do through TenK Solutions (tenksolutions.com). I partner with growing companies and organizations across the DMV and nationwide to eliminate operational bottlenecks. From client intake and AI workflow automation to enterprise asset tracking (like my 2,500+ device build for Perkins&Will) and cloud infrastructure, I build systems that run smoothly so your team can scale.",
+    answer: (
+      <>
+        That&apos;s exactly what I do through{" "}
+        <a
+          href="https://www.tenksolutions.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          TenK Solutions
+        </a>
+        . I partner with growing companies and organizations across the DMV and
+        nationwide to eliminate operational bottlenecks. From client intake and
+        AI workflow automation to enterprise asset tracking (like my 2,500+
+        device build for{" "}
+        <a
+          href="https://perkinswill.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          Perkins&amp;Will
+        </a>
+        ) and digital leadership as IT Director for{" "}
+        <a
+          href="https://www.phfamoescef.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          PHFAMOESCEF
+        </a>
+        , I build resilient systems that run smoothly.
+      </>
+    ),
     actionText: "Explore Systems Consulting & Connect →",
     targetId: "connect",
   },
@@ -78,8 +189,14 @@ const prompts: StoryPrompt[] = [
     icon: <FaSmileBeam className="text-rose-400" />,
     shortTag: "Roller Skating & Golf",
     question: "Someone told me you roller skate and play golf?",
-    answer:
-      "Guilty as charged! When I'm away from the keyboard, you'll usually find me cruising on roller skates, trying to keep my golf drive in the short grass, hanging out with my wife and two sons, or participating in Masonic brotherhood.",
+    answer: (
+      <>
+        Guilty as charged! When I&apos;m away from the keyboard, you&apos;ll
+        usually find me rolling around on skates, trying to swing my driver like
+        I swing my irons, hanging out with my family on excursions, or
+        participating in fraternalism and charity work.
+      </>
+    ),
     actionText: "Life Beyond the Screen →",
     targetId: "ethos",
   },
@@ -89,8 +206,49 @@ const prompts: StoryPrompt[] = [
     shortTag: "Problem Solving",
     question:
       "Someone said: 'Talk to Kiel, he likes solving complex problems.'",
-    answer:
-      "I do really enjoy untangling problems that don't fit neatly into a single box. Having a background that spans mechanical engineering (UMBC), plumbing systems (NYU), IT infrastructure, and modern frontend development lets me look at challenges from a few different angles.",
+    answer: (
+      <>
+        I do really enjoy untangling problems that don&apos;t fit neatly into a
+        single box. Having a background that spans mechanical engineering (
+        <a
+          href="https://umbc.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          UMBC
+        </a>
+        ), plumbing systems (
+        <a
+          href="https://www.sps.nyu.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          NYU
+        </a>
+        ), IT infrastructure (
+        <a
+          href="https://www.hok.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          HOK
+        </a>{" "}
+        &amp;{" "}
+        <a
+          href="https://perkinswill.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:underline font-medium"
+        >
+          Perkins&amp;Will
+        </a>
+        ), and modern frontend development lets me look at challenges from a few
+        different angles.
+      </>
+    ),
     actionText: "Say Hello →",
     targetId: "connect",
   },

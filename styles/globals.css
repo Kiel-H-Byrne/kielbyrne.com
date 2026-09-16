@@ -2,26 +2,269 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  background-color: #020617;
-  color: #f8fafc;
+/* =========================================================================
+   Theme Tokens & Virgo-Precision Light/Dark Mode Foundation
+   ========================================================================= */
+
+:root {
+  --color-bg-base: #020617;
+  --color-bg-surface: #0f172a;
+  --color-bg-card: rgba(15, 23, 42, 0.85);
+  --color-border: #1e293b;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-nav-bg: rgba(2, 6, 23, 0.85);
 }
 
-/* Custom scrollbar */
+html.light {
+  --color-bg-base: #f8fafc;
+  --color-bg-surface: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748b;
+  --color-nav-bg: rgba(255, 255, 255, 0.88);
+}
+
+/* Base HTML & Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================================
+   Light Mode Overrides (Precision Tuned for High Contrast & Elegant Polish)
+   ========================================================================= */
+
+/* Background Surfaces */
+html.light body,
+html.light main {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+html.light .bg-slate-950,
+html.light .bg-slate-950\/95,
+html.light .bg-slate-950\/90,
+html.light .bg-slate-950\/80,
+html.light .bg-slate-950\/70,
+html.light .bg-slate-950\/60 {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-slate-900,
+html.light .bg-slate-900\/90,
+html.light .bg-slate-900\/80,
+html.light .bg-slate-900\/70,
+html.light .bg-slate-900\/60 {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .bg-slate-800,
+html.light .bg-slate-800\/80,
+html.light .bg-slate-800\/60 {
+  background-color: #e2e8f0 !important;
+}
+
+/* Sections Background Alternation */
+html.light #hero {
+  background-color: #f8fafc !important;
+}
+html.light #about {
+  background-color: #ffffff !important;
+}
+html.light #dimensions {
+  background-color: #f8fafc !important;
+}
+html.light #creations {
+  background-color: #ffffff !important;
+}
+html.light #audio-lab {
+  background-color: #f8fafc !important;
+}
+html.light #ethos {
+  background-color: #ffffff !important;
+}
+html.light #connect {
+  background-color: #f8fafc !important;
+}
+
+/* Text Colors */
+html.light .text-white {
+  color: #0f172a !important;
+}
+html.light .text-slate-100,
+html.light .text-slate-200 {
+  color: #1e293b !important;
+}
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Borders */
+html.light .border-slate-800,
+html.light .border-slate-800\/80,
+html.light .border-slate-800\/60,
+html.light .border-slate-800\/50,
+html.light .border-slate-700,
+html.light .border-slate-700\/80,
+html.light .border-slate-700\/60 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Shadows in Light Mode */
+html.light .shadow-2xl,
+html.light .shadow-xl {
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.06),
+    0 4px 12px -2px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Navbar in Light Mode */
+html.light nav {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Cards & Containers */
+html.light .bg-slate-950\/70,
+html.light .bg-slate-950\/80,
+html.light .bg-slate-950\/90 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Thematic Badges in Light Mode (High Contrast & Clean Pastels) */
+html.light .bg-cyan-950\/80,
+html.light .bg-cyan-950\/70,
+html.light .bg-cyan-950\/60 {
+  background-color: #ecfeff !important;
+  border-color: #a5f3fc !important;
+  color: #0e7490 !important;
+}
+
+html.light .bg-emerald-950\/80,
+html.light .bg-emerald-950\/70,
+html.light .bg-emerald-950\/60 {
+  background-color: #ecfdf5 !important;
+  border-color: #a7f3d0 !important;
+  color: #047857 !important;
+}
+
+html.light .bg-purple-950\/80,
+html.light .bg-purple-950\/70,
+html.light .bg-purple-950\/60 {
+  background-color: #faf5ff !important;
+  border-color: #e9d5ff !important;
+  color: #7e22ce !important;
+}
+
+html.light .bg-amber-950\/80,
+html.light .bg-amber-950\/70,
+html.light .bg-amber-950\/60 {
+  background-color: #fffbeb !important;
+  border-color: #fde68a !important;
+  color: #b45309 !important;
+}
+
+html.light .bg-rose-950\/80,
+html.light .bg-rose-950\/70,
+html.light .bg-rose-950\/60 {
+  background-color: #fff1f2 !important;
+  border-color: #fecdd3 !important;
+  color: #be123c !important;
+}
+
+html.light .bg-fuchsia-950\/80,
+html.light .bg-fuchsia-950\/70,
+html.light .bg-fuchsia-950\/60 {
+  background-color: #fdf4ff !important;
+  border-color: #f5d0fe !important;
+  color: #a21caf !important;
+}
+
+/* Gradients in Hero & Headers */
+html.light .from-white {
+  --tw-gradient-from: #0f172a var(--tw-gradient-from-position) !important;
+}
+html.light .via-slate-100 {
+  --tw-gradient-stops: var(--tw-gradient-from),
+    #1e293b var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+html.light .to-slate-400 {
+  --tw-gradient-to: #475569 var(--tw-gradient-to-position) !important;
+}
+
+/* Interactive Pills / Active Buttons */
+html.light button.bg-slate-800 {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* High-Contrast Accents & Icons in Light Mode */
+html.light .text-emerald-400 {
+  color: #059669 !important;
+}
+html.light .text-cyan-400 {
+  color: #0891b2 !important;
+}
+html.light .text-cyan-300 {
+  color: #0284c7 !important;
+}
+html.light .text-purple-400 {
+  color: #9333ea !important;
+}
+html.light .text-amber-400 {
+  color: #d97706 !important;
+}
+html.light .text-rose-400 {
+  color: #e11d48 !important;
+}
+html.light .text-teal-400 {
+  color: #0d9488 !important;
+}
+html.light .text-fuchsia-400 {
+  color: #c026d3 !important;
+}
+
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: var(--color-bg-base);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #334155;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #475569;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
