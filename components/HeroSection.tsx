@@ -333,8 +333,8 @@ const HeroSection: React.FC = () => {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/60 backdrop-blur-md text-xs sm:text-sm text-cyan-300 mb-6 shadow-lg shadow-cyan-950/40">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span>
-            Frontend Developer @ Lyntris (LYNX) • Systems Engineering &amp; IT
-            Consulting @ TenK Solutions
+            Frontend Software Developer • Principal Systems Consultant @ TenK
+            Solutions
           </span>
         </div>
 
