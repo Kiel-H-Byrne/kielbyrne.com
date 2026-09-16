@@ -84,7 +84,7 @@ const LandingPageTemplate = () => {
           <Link href="https://www.linkedin.com/in/kielbyrne">LinkedIn</Link>.
           Also check out my IT Consulting company,{" "}
           <Link href="https://www.tenksolutions.com">TenK Solutions</Link>.
-          Let's make a positive change in the world together! 😊
+          Let&apos;s make a positive change in the world together! 😊
         </Text>
       </main>
     </div>

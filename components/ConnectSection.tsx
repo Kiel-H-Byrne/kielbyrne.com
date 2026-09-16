@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import {
-  FaLinkedin,
-  FaGithub,
-  FaGlobe,
-  FaPaperPlane,
-  FaMapMarkerAlt,
   FaCommentDots,
   FaExternalLinkAlt,
-  FaServer,
+  FaGithub,
+  FaGlobe,
+  FaLinkedin,
+  FaMapMarkerAlt,
+  FaPaperPlane,
 } from "react-icons/fa";
 
 const ConnectSection: React.FC = () => {
@@ -40,7 +39,7 @@ const ConnectSection: React.FC = () => {
             Say Hello
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-            Let's Connect
+            Let&apos;s Connect
           </h2>
           <p className="mt-4 text-slate-300 text-base sm:text-lg font-light leading-relaxed">
             Whether you need a systems engineering partner to eliminate business
