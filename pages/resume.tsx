@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { Box, Button, Container, Flex } from "@chakra-ui/react";
 import { useState } from "react";
+import { trackResumeAction } from "@/lib/gtag";
 
 enum PDFTYPES {
   PR = "Personal Resume",
@@ -18,9 +19,11 @@ const ResumePage = () => {
     if (isPR) {
       setpdfPath(PDFPATHS.CV);
       setpdfTitle(PDFTYPES.PR);
+      trackResumeAction("toggle_view", PDFTYPES.CV, PDFPATHS.CV);
     } else {
       setpdfPath(PDFPATHS.PR);
       setpdfTitle(PDFTYPES.CV);
+      trackResumeAction("toggle_view", PDFTYPES.PR, PDFPATHS.PR);
     }
   };
   return (
@@ -45,7 +48,15 @@ const ResumePage = () => {
           height="100%"
         >
           <p>
-            Unable to display PDF file. <a href={`/${pdfPath}`}>Download</a>{" "}
+            Unable to display PDF file.{" "}
+            <a
+              href={`/${pdfPath}`}
+              onClick={() =>
+                trackResumeAction("download_pdf", isPR ? PDFTYPES.PR : PDFTYPES.CV, pdfPath)
+              }
+            >
+              Download
+            </a>{" "}
             instead.
           </p>
         </object>

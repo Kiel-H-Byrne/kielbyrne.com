@@ -13,6 +13,7 @@ import {
   FaMagic,
 } from "react-icons/fa";
 import { personas, Persona } from "@/data/personas";
+import { trackPersonaAction } from "@/lib/gtag";
 
 const AUTOPLAY_INTERVAL = 6000; // 6 seconds per persona
 
@@ -24,19 +25,39 @@ export const PersonaCarousel: React.FC = () => {
 
   const currentPersona: Persona = personas[currentIndex] || personas[0];
 
-  const goToNext = useCallback(() => {
+  const goToNext = useCallback((manual: boolean = false) => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % personas.length);
+    setCurrentIndex((prev) => {
+      const nextIdx = (prev + 1) % personas.length;
+      if (manual) {
+        trackPersonaAction("next", personas[nextIdx], nextIdx);
+      }
+      return nextIdx;
+    });
   }, []);
 
-  const goToPrev = useCallback(() => {
+  const goToPrev = useCallback((manual: boolean = false) => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + personas.length) % personas.length);
+    setCurrentIndex((prev) => {
+      const prevIdx = (prev - 1 + personas.length) % personas.length;
+      if (manual) {
+        trackPersonaAction("prev", personas[prevIdx], prevIdx);
+      }
+      return prevIdx;
+    });
   }, []);
 
   const selectPersona = (index: number) => {
     setDirection(index > currentIndex ? 1 : -1);
+    trackPersonaAction("select", personas[index], index);
     setCurrentIndex(index);
+  };
+
+  const togglePause = () => {
+    setIsPaused((prev) => {
+      trackPersonaAction("toggle_autoplay", currentPersona, currentIndex);
+      return !prev;
+    });
   };
 
   // Autoplay management
@@ -47,7 +68,7 @@ export const PersonaCarousel: React.FC = () => {
     }
 
     timerRef.current = setInterval(() => {
-      goToNext();
+      goToNext(false);
     }, AUTOPLAY_INTERVAL);
 
     return () => {
@@ -58,12 +79,12 @@ export const PersonaCarousel: React.FC = () => {
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
-      goToPrev();
+      goToPrev(true);
     } else if (e.key === "ArrowRight") {
-      goToNext();
+      goToNext(true);
     } else if (e.key === " ") {
       e.preventDefault();
-      setIsPaused((prev) => !prev);
+      togglePause();
     }
   };
 
@@ -141,14 +162,14 @@ export const PersonaCarousel: React.FC = () => {
 
             {/* Interactive Prev/Next Buttons floating on sides */}
             <button
-              onClick={goToPrev}
+              onClick={() => goToPrev(true)}
               aria-label="Previous persona"
               className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/85 hover:bg-slate-800 text-slate-200 border border-slate-700/80 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 active:scale-95 shadow-lg backdrop-blur-xs"
             >
               <FaChevronLeft className="text-xs -ml-0.5" />
             </button>
             <button
-              onClick={goToNext}
+              onClick={() => goToNext(true)}
               aria-label="Next persona"
               className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/85 hover:bg-slate-800 text-slate-200 border border-slate-700/80 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 active:scale-95 shadow-lg backdrop-blur-xs"
             >
@@ -184,7 +205,7 @@ export const PersonaCarousel: React.FC = () => {
               </h3>
 
               <button
-                onClick={() => setIsPaused((prev) => !prev)}
+                onClick={togglePause}
                 aria-label={isPaused ? "Play carousel" : "Pause carousel"}
                 className="text-slate-400 hover:text-white p-1 rounded transition text-xs flex items-center gap-1"
                 title={

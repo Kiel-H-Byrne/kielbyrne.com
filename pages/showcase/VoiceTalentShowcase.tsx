@@ -1,4 +1,5 @@
 import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { trackAudioAction } from "@/lib/gtag";
 
 export const VoiceClip = ({
   imageSrc,
@@ -18,7 +19,19 @@ export const VoiceClip = ({
         {heading}
       </Heading>
       <Text mb={4}>{description}</Text>
-      <audio src={audioSrc} controls />
+      <audio
+        src={audioSrc}
+        controls
+        onPlay={() =>
+          trackAudioAction("play", { title: heading, src: audioSrc })
+        }
+        onPause={() =>
+          trackAudioAction("pause", { title: heading, src: audioSrc })
+        }
+        onEnded={() =>
+          trackAudioAction("complete", { title: heading, src: audioSrc })
+        }
+      />
     </Box>
   );
 };

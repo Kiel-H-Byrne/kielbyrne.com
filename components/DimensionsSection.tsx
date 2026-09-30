@@ -9,6 +9,7 @@ import {
   FaServer,
   FaExternalLinkAlt,
 } from "react-icons/fa";
+import { trackEvent, trackLeadOrChannel } from "@/lib/gtag";
 
 interface Dimension {
   id: string;
@@ -198,7 +199,15 @@ const DimensionsSection: React.FC = () => {
             return (
               <button
                 key={dim.id}
-                onClick={() => setActiveTab(dim.id)}
+                onClick={() => {
+                  trackEvent({
+                    action: "dimension_tab_select",
+                    category: "content_engagement",
+                    label: dim.tabLabel,
+                    dimension_id: dim.id,
+                  });
+                  setActiveTab(dim.id);
+                }}
                 className={`flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-xl font-medium text-xs sm:text-sm transition transform hover:-translate-y-0.5 border ${
                   isSelected
                     ? `bg-slate-800 text-white border-slate-600 shadow-xl shadow-slate-950`
@@ -283,6 +292,12 @@ const DimensionsSection: React.FC = () => {
                       currentDim.customCta.external
                         ? "noopener noreferrer"
                         : undefined
+                    }
+                    onClick={() =>
+                      trackLeadOrChannel("click_cta", {
+                        ctaName: currentDim.customCta?.text,
+                        url: currentDim.customCta?.href,
+                      })
                     }
                     className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 transition transform hover:-translate-y-0.5"
                   >

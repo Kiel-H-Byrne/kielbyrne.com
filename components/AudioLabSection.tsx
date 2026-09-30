@@ -8,6 +8,7 @@ import {
   FaHeadphones,
   FaMicrophone,
 } from "react-icons/fa";
+import { trackAudioAction } from "@/lib/gtag";
 
 interface Track {
   id: string;
@@ -71,9 +72,17 @@ const AudioLabSection: React.FC = () => {
   const togglePlay = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
+      trackAudioAction("pause", currentTrack, {
+        currentTime,
+        progressPercent: duration ? (currentTime / duration) * 100 : 0,
+      });
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
+      trackAudioAction("play", currentTrack, {
+        currentTime,
+        progressPercent: duration ? (currentTime / duration) * 100 : 0,
+      });
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
@@ -82,6 +91,8 @@ const AudioLabSection: React.FC = () => {
   };
 
   const selectTrack = (index: number) => {
+    const selected = tracks[index];
+    trackAudioAction("select_track", selected);
     setCurrentTrackIndex(index);
     setIsPlaying(false);
     setTimeout(() => {
@@ -89,7 +100,10 @@ const AudioLabSection: React.FC = () => {
         audioRef.current.currentTime = 0;
         audioRef.current
           .play()
-          .then(() => setIsPlaying(true))
+          .then(() => {
+            setIsPlaying(true);
+            trackAudioAction("play", selected, { currentTime: 0, progressPercent: 0 });
+          })
           .catch(() => {});
       }
     }, 50);
@@ -117,6 +131,7 @@ const AudioLabSection: React.FC = () => {
     };
 
     const handleEnded = () => {
+      trackAudioAction("complete", currentTrack, { progressPercent: 100 });
       setIsPlaying(false);
     };
 
@@ -129,13 +144,17 @@ const AudioLabSection: React.FC = () => {
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [isPlaying]);
+  }, [isPlaying, currentTrack]);
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const time = Number(e.target.value);
     if (audioRef.current) {
       audioRef.current.currentTime = time;
       setCurrentTime(time);
+      trackAudioAction("seek", currentTrack, {
+        currentTime: time,
+        progressPercent: duration ? (time / duration) * 100 : 0,
+      });
     }
   };
 
@@ -256,7 +275,11 @@ const AudioLabSection: React.FC = () => {
                   </button>
 
                   <button
-                    onClick={() => setIsMuted(!isMuted)}
+                    onClick={() => {
+                      const nextMuted = !isMuted;
+                      trackAudioAction(nextMuted ? "mute" : "unmute", currentTrack);
+                      setIsMuted(nextMuted);
+                    }}
                     aria-label={isMuted ? "Unmute" : "Mute"}
                     className="p-3 text-slate-400 hover:text-white rounded-xl bg-slate-800/80 border border-slate-700/60 transition"
                   >
@@ -271,6 +294,7 @@ const AudioLabSection: React.FC = () => {
                 <a
                   href={currentTrack.src}
                   download
+                  onClick={() => trackAudioAction("download", currentTrack)}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-200 hover:text-cyan-300 transition"
                 >
                   <FaDownload />

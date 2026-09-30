@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { FaCompass, FaMicrophone, FaTerminal, FaServer } from "react-icons/fa";
+import { trackNavigation, trackLeadOrChannel } from "@/lib/gtag";
 
 const HeroSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -305,7 +306,12 @@ const HeroSection: React.FC = () => {
     };
   }, []);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (
+    id: string,
+    label?: string,
+    navType: "quick_jump" | "desktop_nav" = "quick_jump"
+  ) => {
+    trackNavigation(label || id, `#${id}`, navType);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -355,7 +361,7 @@ const HeroSection: React.FC = () => {
         {/* Primary Action Buttons */}
         <div className="flex flex-wrap justify-center gap-3.5 mb-12">
           <button
-            onClick={() => scrollTo("dimensions")}
+            onClick={() => scrollTo("dimensions", "Hero CTA: Explore What I Do")}
             className="px-5 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium rounded-xl shadow-lg shadow-cyan-900/30 transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm"
           >
             <FaCompass className="text-cyan-200" />
@@ -363,7 +369,10 @@ const HeroSection: React.FC = () => {
           </button>
 
           <button
-            onClick={() => scrollTo("connect")}
+            onClick={() => {
+              trackLeadOrChannel("click_cta", { ctaName: "Hero CTA: IT Systems & Consulting", url: "#connect" });
+              scrollTo("connect", "Hero CTA: IT Systems & Consulting");
+            }}
             className="px-5 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-medium rounded-xl shadow-lg shadow-emerald-950/40 transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm"
           >
             <FaServer className="text-emerald-200" />
@@ -371,7 +380,7 @@ const HeroSection: React.FC = () => {
           </button>
 
           <button
-            onClick={() => scrollTo("creations")}
+            onClick={() => scrollTo("creations", "Hero CTA: Selected Work")}
             className="px-5 py-3.5 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/70 hover:border-slate-500 text-slate-200 font-medium rounded-xl backdrop-blur-md transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm"
           >
             <FaTerminal className="text-emerald-400" />
@@ -379,7 +388,7 @@ const HeroSection: React.FC = () => {
           </button>
 
           <button
-            onClick={() => scrollTo("audio-lab")}
+            onClick={() => scrollTo("audio-lab", "Hero CTA: Voice & Audio Lab")}
             className="px-5 py-3.5 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 hover:border-amber-500/50 text-slate-200 font-medium rounded-xl backdrop-blur-md transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm"
           >
             <FaMicrophone className="text-amber-400" />
@@ -400,7 +409,7 @@ const HeroSection: React.FC = () => {
           ].map((item) => (
             <button
               key={item.id}
-              onClick={() => scrollTo(item.id)}
+              onClick={() => scrollTo(item.id, `Hero Badge: ${item.label}`)}
               className="px-3 py-1 rounded-lg bg-slate-800/50 hover:bg-slate-800 hover:text-cyan-300 border border-slate-700/40 transition"
             >
               {item.label}
@@ -411,7 +420,7 @@ const HeroSection: React.FC = () => {
 
       {/* Down Scroll Prompt */}
       <button
-        onClick={() => scrollTo("about")}
+        onClick={() => scrollTo("about", "Hero Down Arrow")}
         aria-label="Scroll to content"
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-slate-400 hover:text-cyan-300 transition animate-bounce p-2"
       >

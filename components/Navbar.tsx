@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useSectionTracker } from "@/hooks/useSectionTracker";
 import CelestialToggle from "./CelestialToggle";
+import { trackNavigation, trackLeadOrChannel, trackEvent } from "@/lib/gtag";
 
 const navItems = [
   { id: "hero", label: "Home" },
@@ -17,7 +18,8 @@ const Navbar: React.FC = () => {
   const [navOpen, setNavOpen] = useState(false);
   const activeSection = useSectionTracker(navItems.map((item) => item.id));
 
-  const handleNavClick = (id: string) => {
+  const handleNavClick = (id: string, label: string = id, navType: "desktop_nav" | "mobile_nav" | "brand_logo" = "desktop_nav") => {
+    trackNavigation(label, `#${id}`, navType);
     setNavOpen(false);
     const el = document.getElementById(id);
     if (el) {
@@ -25,12 +27,27 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const handleCtaClick = () => {
+    trackLeadOrChannel("click_cta", { ctaName: "Get In Touch", url: "#connect" });
+    handleNavClick("connect", "Get In Touch", "desktop_nav");
+  };
+
+  const handleToggleMenu = () => {
+    const nextState = !navOpen;
+    trackEvent({
+      action: "mobile_menu_toggle",
+      category: "navigation",
+      label: nextState ? "open" : "close",
+    });
+    setNavOpen(nextState);
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/60 transition-all duration-300">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 py-3.5">
         {/* Brand Logo */}
         <button
-          onClick={() => handleNavClick("hero")}
+          onClick={() => handleNavClick("hero", "KB Brand Logo", "brand_logo")}
           className="text-left group flex items-center gap-2 text-white font-bold tracking-tight text-lg sm:text-xl"
         >
           <span className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-sm font-black shadow-md shadow-cyan-500/20 group-hover:scale-105 transition transform">
@@ -48,7 +65,7 @@ const Navbar: React.FC = () => {
             return (
               <li key={item.id}>
                 <button
-                  onClick={() => handleNavClick(item.id)}
+                  onClick={() => handleNavClick(item.id, item.label, "desktop_nav")}
                   className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                     isActive
                       ? "text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 shadow-sm shadow-cyan-900/40"
@@ -66,7 +83,7 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex items-center gap-3">
           <CelestialToggle />
           <button
-            onClick={() => handleNavClick("connect")}
+            onClick={handleCtaClick}
             className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg shadow-md shadow-cyan-900/20 transition transform hover:-translate-y-0.5"
           >
             Get In Touch
@@ -77,7 +94,7 @@ const Navbar: React.FC = () => {
         <div className="lg:hidden flex items-center gap-2">
           <CelestialToggle compact />
           <button
-            onClick={() => setNavOpen(!navOpen)}
+            onClick={handleToggleMenu}
             aria-label="Toggle Menu"
             className="p-2 text-slate-300 hover:text-white focus:outline-none"
           >
@@ -95,7 +112,7 @@ const Navbar: React.FC = () => {
               return (
                 <li key={item.id}>
                   <button
-                    onClick={() => handleNavClick(item.id)}
+                    onClick={() => handleNavClick(item.id, item.label, "mobile_nav")}
                     className={`w-full text-left py-2 px-3 rounded-lg text-base font-medium transition ${
                       isActive
                         ? "text-cyan-300 bg-cyan-950/60 border-l-4 border-cyan-400"
@@ -109,7 +126,10 @@ const Navbar: React.FC = () => {
             })}
             <li className="pt-2">
               <button
-                onClick={() => handleNavClick("connect")}
+                onClick={() => {
+                  trackLeadOrChannel("click_cta", { ctaName: "Get In Touch (Mobile)", url: "#connect" });
+                  handleNavClick("connect", "Get In Touch", "mobile_nav");
+                }}
                 className="w-full py-3 text-center text-sm font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg shadow-md"
               >
                 Get In Touch

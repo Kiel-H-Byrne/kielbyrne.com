@@ -5,6 +5,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
+import { trackThemeToggle } from "@/lib/gtag";
 
 export type Theme = "dark" | "light";
 
@@ -69,6 +70,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const setTheme = useCallback(
     (newTheme: Theme) => {
+      trackThemeToggle(newTheme, "set_theme");
       setThemeState(newTheme);
       localStorage.setItem(THEME_STORAGE_KEY, newTheme);
       applyThemeToDOM(newTheme);
@@ -78,6 +80,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const toggleTheme = useCallback(() => {
     const nextTheme: Theme = theme === "dark" ? "light" : "dark";
+    trackThemeToggle(nextTheme, "celestial_toggle");
     const celestialDirection = nextTheme === "light" ? "sunrise" : "sunset";
 
     setTransitionType(celestialDirection);
