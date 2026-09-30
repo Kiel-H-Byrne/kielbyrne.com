@@ -10,6 +10,7 @@ import {
   FaServer,
   FaSmileBeam,
 } from "react-icons/fa";
+import { trackRabbitHoleAction } from "@/lib/gtag";
 
 interface StoryPrompt {
   id: string;
@@ -259,7 +260,22 @@ const GoogleRabbitHole: React.FC = () => {
   const currentPrompt =
     prompts.find((p) => p.id === selectedPromptId) || prompts[0];
 
+  const handleSelectPrompt = (prompt: StoryPrompt) => {
+    setSelectedPromptId(prompt.id);
+    trackRabbitHoleAction("select_prompt", {
+      id: prompt.id,
+      tag: prompt.shortTag,
+      targetId: prompt.targetId,
+      question: prompt.question,
+    });
+  };
+
   const handleJump = (targetId: string) => {
+    trackRabbitHoleAction("click_cta", {
+      id: currentPrompt.id,
+      tag: currentPrompt.shortTag,
+      targetId,
+    });
     const el = document.getElementById(targetId);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -299,7 +315,7 @@ const GoogleRabbitHole: React.FC = () => {
             return (
               <button
                 key={p.id}
-                onClick={() => setSelectedPromptId(p.id)}
+                onClick={() => handleSelectPrompt(p)}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition duration-200 border ${
                   isSelected
                     ? "bg-slate-800 text-white border-cyan-400 shadow-md shadow-cyan-950"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaExternalLinkAlt, FaGithub, FaLayerGroup } from "react-icons/fa";
+import { trackProjectAction } from "@/lib/gtag";
 
 interface Project {
   id: string;
@@ -169,7 +170,10 @@ const CreationsSection: React.FC = () => {
           {filterCategories.map((cat) => (
             <button
               key={cat.key}
-              onClick={() => setFilter(cat.key)}
+              onClick={() => {
+                trackProjectAction("filter_category", { filterKey: cat.key, title: cat.label });
+                setFilter(cat.key);
+              }}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition border ${
                 filter === cat.key
                   ? "bg-emerald-500 text-slate-950 font-bold border-emerald-400 shadow-lg shadow-emerald-950"
@@ -241,6 +245,14 @@ const CreationsSection: React.FC = () => {
                         href={project.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          trackProjectAction("click_live_demo", {
+                            id: project.id,
+                            title: project.title,
+                            category: project.category,
+                            url: project.url,
+                          })
+                        }
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition"
                       >
                         <span>Live Experience</span>
@@ -252,6 +264,14 @@ const CreationsSection: React.FC = () => {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          trackProjectAction("click_github_source", {
+                            id: project.id,
+                            title: project.title,
+                            category: project.category,
+                            url: project.github,
+                          })
+                        }
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition"
                       >
                         <FaGithub size={12} />

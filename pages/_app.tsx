@@ -7,6 +7,7 @@ import React from "react";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import CelestialSunPass from "@/components/CelestialSunPass";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = React.useState(() => new QueryClient());
@@ -15,6 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ChakraProvider value={defaultSystem}>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools />
+          <GoogleAnalytics />
           <Head>
             <meta
               name="viewport"

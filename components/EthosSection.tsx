@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCompass, FaLinkedin, FaUsers, FaLightbulb } from "react-icons/fa";
 import { GiGolfFlag, GiRollerSkate } from "react-icons/gi";
+import { trackLeadOrChannel } from "@/lib/gtag";
 
 const ethosItems = [
   {
@@ -121,6 +122,12 @@ const EthosSection: React.FC = () => {
                 href="https://www.linkedin.com/in/kielbyrne"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackLeadOrChannel("click_cta", {
+                    ctaName: "Request Resume & CV on LinkedIn",
+                    url: "https://www.linkedin.com/in/kielbyrne",
+                  })
+                }
                 className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-cyan-950 transition flex items-center gap-2"
               >
                 <FaLinkedin />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { trackSectionView } from "@/lib/gtag";
 
 export function useSectionTracker(sectionIds: string[]) {
   const [activeSection, setActiveSection] = useState<string>(
@@ -25,8 +26,10 @@ export function useSectionTracker(sectionIds: string[]) {
                 window.history.replaceState(null, "", `#${id}`);
               }
 
-              // Dispatch telemetry event for analytics (Vercel Analytics / custom gtag)
+              // Dispatch telemetry event for Google Analytics & custom listeners
               try {
+                trackSectionView(id);
+
                 if ((window as any).va) {
                   (window as any).va("event", {
                     name: "section_view",

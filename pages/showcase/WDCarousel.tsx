@@ -9,6 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { trackProjectAction } from "@/lib/gtag";
 export const WDCarousel = () => {
   const arrowStyles = {
     cursor: "pointer",
@@ -71,14 +72,23 @@ export const WDCarousel = () => {
   const slidesCount = slides.length;
 
   const prevSlide = () => {
-    setCurrentSlide((s) => (s === 0 ? slidesCount - 1 : s - 1));
+    setCurrentSlide((s) => {
+      const nextIdx = s === 0 ? slidesCount - 1 : s - 1;
+      trackProjectAction("view_card", { title: slides[nextIdx].label });
+      return nextIdx;
+    });
   };
 
   const nextSlide = () => {
-    setCurrentSlide((s) => (s === slidesCount - 1 ? 0 : s + 1));
+    setCurrentSlide((s) => {
+      const nextIdx = s === slidesCount - 1 ? 0 : s + 1;
+      trackProjectAction("view_card", { title: slides[nextIdx].label });
+      return nextIdx;
+    });
   };
 
   const setSlide = (slide: number) => {
+    trackProjectAction("view_card", { title: slides[slide].label });
     setCurrentSlide(slide);
   };
 
@@ -134,7 +144,17 @@ export const WDCarousel = () => {
               >
                 <Text fontSize="2xl">{slide.label}</Text>
                 <Text fontSize="lg">{slide.description}</Text>
-                <Link target="_blank" fontSize="md" href={slide.url}>
+                <Link
+                  target="_blank"
+                  fontSize="md"
+                  href={slide.url}
+                  onClick={() =>
+                    trackProjectAction("click_live_demo", {
+                      title: slide.label,
+                      url: slide.url,
+                    })
+                  }
+                >
                   <Button colorScheme="yellow">Visit</Button>
                 </Link>
               </Stack>
